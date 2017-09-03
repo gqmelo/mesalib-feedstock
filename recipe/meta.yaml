@@ -28,21 +28,19 @@ build:
 
 requirements:
   build:
-    - pthread-stubs
-    - pkgconfig
+    - pthread-stubs  # [unix]
+    - pkgconfig  # [unix]
     - gcc  # [linux]
     - python  # [win]
     - toolchain
-    - llvmdev
+    - llvmdev 4.0.*
     - m2-flex  # [win]
     - m2-bison  # [win]
     - m2-xz  # [win32]
     - m2w64-xz  # [win64]
     - vc 14  # [win]
   run:
-    - pthread-stubs
     - libgcc  # [linux]
-    - llvmdev
     - vs2015_runtime  # [win]
 
 test:
