@@ -10,6 +10,9 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: ftp://ftp.freedesktop.org/pub/mesa/mesa-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # We need to match the linker flags used on llvm build
+    - windows-md-flag.patch  # [win]
 
 build:
   # Mesa build needs python2, but we also need to use vc14 feature
