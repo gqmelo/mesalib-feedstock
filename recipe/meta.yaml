@@ -1,5 +1,6 @@
 {% set name = "mesaLib" %}
 {% set version = "17.1.4" %}
+{% set sha256 = "f82fbbdf2dcec0e7e5aa3a8fe4bacd50bf4b7293cc6e1a56658ae6504d732362" %}
 
 package:
   name: {{ name|lower }}
@@ -8,30 +9,44 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: ftp://ftp.freedesktop.org/pub/mesa/mesa-{{ version }}.tar.gz
-  sha256: f82fbbdf2dcec0e7e5aa3a8fe4bacd50bf4b7293cc6e1a56658ae6504d732362
+  sha256: {{ sha256 }}
 
 build:
-  skip: True  # [win or py3k]
+  # Mesa build needs python2, but we also need to use vc14 feature
+  # (which we can only use with python 3). So build with in a python 3 env
+  # and handle scons on the build script.
+  skip: True  # [(unix and py3k) or (win and not py36)]
+#  skip: True  # [win and not py36]
   number: 3
+  # It does not seem necessary to declare vc features as the OpenGL API is not
+  # C++ (although Mesa's internals are)
   track_features:
       - mesalib
 
 requirements:
   build:
-      - pthread-stubs
-      - pkgconfig
-      - gcc  # [linux]
-      - toolchain
-      - llvmdev
+    - pthread-stubs
+    - pkgconfig
+    - gcc  # [linux]
+    - python  # [win]
+    - toolchain
+    - llvmdev
+    - m2-flex  # [win]
+    - m2-bison  # [win]
+    - m2-xz  # [win32]
+    - m2w64-xz  # [win64]
+    - vc 14  # [win]
   run:
-      - pthread-stubs
-      - libgcc  # [linux]
-      - llvmdev
+    - pthread-stubs
+    - libgcc  # [linux]
+    - llvmdev
+    - vs2015_runtime  # [win]
 
 test:
   commands:
-      - test -f $PREFIX/lib/libOSMesa32.so      # [linux]
-      - test -f $PREFIX/lib/libOSMesa32.dylib   # [osx]
+    - test -f $PREFIX/lib/libOSMesa32.so      # [linux]
+    - test -f $PREFIX/lib/libOSMesa32.dylib   # [osx]
+    - if not exist %PREFIX%\Library\bin\opengl32.dll exit 1  # [win]
 
 about:
   home: http://www.mesa3d.org
