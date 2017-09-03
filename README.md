@@ -1,7 +1,7 @@
 About mesalib
 =============
 
-Home: http://www.mesa3d.org/
+Home: http://www.mesa3d.org
 
 Package license: MIT
 
@@ -9,8 +9,6 @@ Feedstock license: BSD 3-Clause
 
 Summary: Mesa is an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.
 
-A variety of device drivers allows Mesa to be used in many different environments ranging from software emulation to complete hardware acceleration for modern GPUs.
-Mesa ties into several other open-source projects. The Direct Rendering Infrastructure and X.org to provide OpenGL support to users of X on Linux, FreeBSD and other operating systems.
 
 
 Current build status
@@ -18,7 +16,7 @@ Current build status
 
 Linux: [![Circle CI](https://circleci.com/gh/conda-forge/mesalib-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/mesalib-feedstock)
 OSX: [![TravisCI](https://travis-ci.org/conda-forge/mesalib-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/mesalib-feedstock)
-Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/mesalib-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/mesalib-feedstock/branch/master)
 
 Current release info
 ====================
