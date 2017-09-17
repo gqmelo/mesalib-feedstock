@@ -3,6 +3,7 @@ call conda create -y -n %SRC_DIR%\_conda_build_scons_env scons mako
 if errorlevel 1 exit 1
 
 set LLVM=%PREFIX%\Library
+set HOST_ARCH=%PROCESSOR_ARCHITECTURE%
 call %SRC_DIR%\_conda_build_scons_env\Scripts\scons -j%CPU_COUNT% ^
                                                     build=release ^
                                                     MSVC_VERSION=14.0 ^
